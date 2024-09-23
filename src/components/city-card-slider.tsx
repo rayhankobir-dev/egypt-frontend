@@ -39,7 +39,7 @@ function CityCardSlider({
         </div>
         <Swiper
           className="city-slider w-full overflow-hidden"
-          slidesPerView={4}
+          slidesPerView={1}
           spaceBetween={10}
           draggable={true}
           navigation={{

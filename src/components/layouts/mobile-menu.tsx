@@ -44,13 +44,13 @@ export default function MobileMenu({ menus }: { menus: Menu[] }) {
               alt="Logo"
             />
           </Link>
-          <div className="h-[80%] overflow-y-scroll flex flex-col justify-between py-2">
+          <div className="h-[80%] overflow-y-scroll flex flex-col">
             {menus.map(({ label, url, icon: Icon }) => (
               <Link
                 key={url}
                 href={url}
                 onClick={() => setOpen(false)}
-                className="group flex items-center rounded-md px-3 py-3.5 border-b text-sm font-medium hover:text-green-800 hover:bg-gray-100"
+                className="group flex items-center rounded-md px-3 py-3.5 border-b text-sm font-medium hover:text-green-800 hover:bg-gray-100 transition-all duration-300"
                 aria-label={label}
               >
                 <Icon className="mr-2 h-4 w-4" />

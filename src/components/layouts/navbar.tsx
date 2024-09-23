@@ -17,13 +17,11 @@ const menus: Menu[] = [
 export default function Navbar() {
   return (
     <header
-      className={cn(
-        "w-full fixed top-0 left-0 z-20 px-6 lg:px-0 duration-700 bg-white"
-      )}
+      className={cn("w-full fixed top-0 left-0 z-20 duration-700 bg-white")}
     >
       <nav
         className={cn(
-          "max-w-7xl mx-auto flex justify-between items-center gap-3 py-3.5 border-b"
+          "max-w-7xl mx-auto flex justify-between items-center gap-3 py-3.5 px-6 lg:px-2 border-b shadow lg:rounded-b-xl"
         )}
       >
         <Link

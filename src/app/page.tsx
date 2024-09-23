@@ -6,8 +6,8 @@ import { cities } from "@/data";
 import ContentSection from "@/components/content-section";
 
 export default async function Home() {
-  const res = await fetch("https://egypt-backend-txj3.onrender.com/api/home");
-  console.log(await res.json());
+  // const res = await fetch("https://egypt-backend-txj3.onrender.com/api/home");
+  // console.log(await res.json());
   return (
     <>
       <HeroSlider slides={[]} />
