@@ -10,9 +10,14 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 function AuthenticatedMenu() {
+  const { data: session } = useSession();
+
+  if (!session?.user) return null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,9 +28,9 @@ function AuthenticatedMenu() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Raju Rayhan</DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user.name}</DropdownMenuLabel>
         <DropdownMenuLabel className="font-light py-0">
-          raju@gmail.com
+          {session?.user.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>Content Mangement</DropdownMenuLabel>
@@ -41,7 +46,10 @@ function AuthenticatedMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-rose-600">
+        <DropdownMenuItem
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="text-rose-600"
+        >
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

@@ -10,7 +10,7 @@ export default function PlanTripSection({ className }: { className?: string }) {
             Get a personalized itinerary just for you, guided by traveler tips
             and reviews.
           </h1>
-          <Button className="w-fit h-12 px-24 text-lg gap-2 text-white bg-transparent border rounded-xl">
+          <Button className="w-full lg:w-fit h-12 px-24 text-lg gap-2 text-white bg-transparent hover:bg-green-800 border rounded-xl">
             <Phone size={20} />
             Contact us
           </Button>

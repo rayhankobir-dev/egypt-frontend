@@ -1,10 +1,12 @@
 "use client";
 import * as Yup from "yup";
 import Image from "next/image";
-import { useState } from "react";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signIn, useSession } from "next-auth/react";
 import ErrorMessage from "@/components/ui/error-message";
 import { Eye, EyeOff, LockKeyhole, LogIn, Mail } from "lucide-react";
 
@@ -14,7 +16,13 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Login() {
+  const router = useRouter();
+  const { status } = useSession();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") router.push("/admin");
+  }, [router, status]);
 
   const initialValues = {
     email: "",
@@ -25,8 +33,19 @@ export default function Login() {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      console.log({ values });
-      formik.resetForm();
+      const res = await signIn("credentials", {
+        redirect: true,
+        email: values.email,
+        password: values.password,
+        callbackUrl: "/admin",
+      });
+
+      if (res?.ok) {
+        formik.resetForm();
+        router.push("/admin");
+      } else {
+        alert("Failed to login");
+      }
     },
   });
 
