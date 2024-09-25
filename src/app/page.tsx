@@ -1,26 +1,29 @@
-import CtaSection from "@/components/cta-section";
-import HeroSlider from "@/components/hero-slider";
-import PlanTripSection from "@/components/plan-section";
-import CityCardSlider from "@/components/city-card-slider";
-import { cities } from "@/data";
-import ContentSection from "@/components/content-section";
+import { City } from "@/types";
+import axiosInstance from "@/api";
+import { Suspense, lazy } from "react";
+const Spinner = lazy(() => import("@/components/spinner"));
+const CtaSection = lazy(() => import("@/components/cta-section"));
+const HeroSlider = lazy(() => import("@/components/hero-slider"));
+const PlanTripSection = lazy(() => import("@/components/plan-section"));
+const CityCardSlider = lazy(() => import("@/components/city-card-slider"));
+const ContentSection = lazy(() => import("@/components/content-section"));
 
-export default async function Home() {
-  // const res = await fetch("https://egypt-backend-txj3.onrender.com/api/home");
-  // console.log(await res.json());
+async function Home() {
+  const { data } = await axiosInstance.get("/home");
+  const res = await axiosInstance.get("/cities");
+  const cities: City[] = res.data.data.cities;
+  const home = data.data.home;
+
   return (
-    <>
-      <HeroSlider slides={[]} />
-      <ContentSection
-        title="History of Egypt"
-        content="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad
-          perspiciatis quasi nam unde quia dolorum natus quos saepe nesciunt
-          recusandae exercitationem officiis sint culpa maxime voluptatibus,
-          ducimus debitis eos quidem?"
-      />
+    <Suspense
+      fallback={<Spinner size={28} className="h-full w-full justify-center" />}
+    >
+      <HeroSlider slides={home.slides} />
+      <ContentSection title="History of Egypt" content={home.history} />
       <CityCardSlider title="Top Cities" subTitle="" cities={cities} />
       <CtaSection />
       <PlanTripSection />
-    </>
+    </Suspense>
   );
 }
+export default Home;

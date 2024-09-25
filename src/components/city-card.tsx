@@ -2,6 +2,7 @@ import Link from "next/link";
 import { City } from "@/types";
 import Image from "next/image";
 import { Map } from "lucide-react";
+import { API_URL } from "@/api";
 
 export default function CityCard({ city }: { city: City }) {
   return (
@@ -11,7 +12,7 @@ export default function CityCard({ city }: { city: City }) {
     >
       <Image
         className="w-full rounded-lg"
-        src={city.thumbnail}
+        src={API_URL + city.thumbnail}
         width={300}
         height={300}
         alt={city.name}

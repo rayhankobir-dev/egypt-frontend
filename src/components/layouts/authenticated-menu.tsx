@@ -10,13 +10,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut, useSession } from "next-auth/react";
+import { useAuth } from "@/context/authContext";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 function AuthenticatedMenu() {
-  const { data: session } = useSession();
+  const { isAuth, user, logout } = useAuth();
 
-  if (!session?.user) return null;
+  if (!isAuth) return null;
 
   return (
     <DropdownMenu>
@@ -28,15 +28,18 @@ function AuthenticatedMenu() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{session?.user.name}</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.fullName}</DropdownMenuLabel>
         <DropdownMenuLabel className="font-light py-0">
-          {session?.user.email}
+          {user?.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>Content Mangement</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/admin">Home</Link>
+            <Link href="/admin">Dashboard</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/admin/cities">Cities</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/admin/gallery">Gallery</Link>
@@ -46,10 +49,7 @@ function AuthenticatedMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => signOut({ callbackUrl: "/" })}
-          className="text-rose-600"
-        >
+        <DropdownMenuItem onClick={() => logout()} className="text-rose-600">
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

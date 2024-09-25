@@ -1,17 +1,18 @@
 "use client";
-import { City } from "@/types";
 import Image from "next/image";
+import { API_URL } from "@/api";
+import { GalleryImage } from "@/types";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
-export default function Gallery({ cities }: { cities: City[] }) {
+export default function Gallery({ images }: { images: GalleryImage[] }) {
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
       <Masonry>
-        {cities.map((city) => (
+        {images?.map(({ imageUrl }, index) => (
           <Image
             className="p-1 rounded-xl"
-            key={city._id}
-            src={city.thumbnail}
+            key={index}
+            src={API_URL + imageUrl}
             height={1024}
             width={1024}
             alt="City"
