@@ -6,6 +6,11 @@ export interface Menu {
   icon: ComponentType<{ className?: string }>;
 }
 
+export interface User {
+  _id: string;
+  fullName: string;
+  email: string;
+}
 export interface City {
   _id: string;
   slug: string;
@@ -13,4 +18,9 @@ export interface City {
   location: string;
   thumbnail: string;
   description: string;
+}
+
+export interface GalleryImage {
+  _id: string;
+  imageUrl: string;
 }

@@ -12,9 +12,11 @@ function ContentSection({ className, title, content }: ContentSectionProps) {
       <div className="flex flex-col gap-2">
         <h1 className="font-bold text-3xl">{title}</h1>
       </div>
-      <div className="flex flex-col gap-1.5">{content}</div>
+      <div
+        className="flex flex-col gap-1.5"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </section>
   );
 }
-
 export default ContentSection;

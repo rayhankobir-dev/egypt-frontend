@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import SessionWrapper from "../providers";
+import { AuthProvider } from "@/context/authContext";
 
 function AuthLayout({ children }: { children: React.ReactNode }) {
-  return <SessionWrapper>{children}</SessionWrapper>;
+  return <AuthProvider>{children}</AuthProvider>;
 }
 
 export default AuthLayout;

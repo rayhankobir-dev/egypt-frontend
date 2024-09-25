@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Menu } from "@/types";
-import SessionWrapper from "@/app/providers";
+import { AuthProvider } from "@/context/authContext";
 import MobileMenu from "@/components/layouts/mobile-menu";
 import { Contact, GalleryHorizontalEnd, Home, Map } from "lucide-react";
 import AuthenticatedMenu from "@/components/layouts/authenticated-menu";
@@ -17,7 +17,7 @@ const menus: Menu[] = [
 
 export default function Navbar() {
   return (
-    <SessionWrapper>
+    <AuthProvider>
       <header
         className={cn("w-full fixed top-0 left-0 z-20 duration-700 bg-white")}
       >
@@ -62,6 +62,6 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
-    </SessionWrapper>
+    </AuthProvider>
   );
 }

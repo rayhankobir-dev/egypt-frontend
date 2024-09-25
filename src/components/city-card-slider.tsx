@@ -24,8 +24,8 @@ function CityCardSlider({
   return (
     <section className={cn("", className)}>
       <div className="flex flex-col gap-2">
-        <h1 className="font-bold text-3xl translate-y-5">{title}</h1>
-        <p className="font-light translate-y-5">{subTitle}</p>
+        <h1 className="font-bold text-3xl">{title}</h1>
+        <p className="font-light">{subTitle}</p>
       </div>
 
       <div className="max-w-7xl mx-auto mb-10">
@@ -39,7 +39,7 @@ function CityCardSlider({
         </div>
         <Swiper
           className="city-slider w-full overflow-hidden"
-          slidesPerView={1}
+          slidesPerView={4}
           spaceBetween={10}
           draggable={true}
           navigation={{
@@ -47,6 +47,10 @@ function CityCardSlider({
             prevEl: ".city-navigation-prev",
           }}
           breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
             480: {
               slidesPerView: 1,
               spaceBetween: 0,

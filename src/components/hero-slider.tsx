@@ -9,6 +9,7 @@ import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Navigation, Pagination, EffectFade } from "swiper/modules";
+import { API_URL } from "@/api";
 
 interface HeroSliderProps {
   className?: string;
@@ -39,14 +40,14 @@ export default function HeroSlider({ className, slides }: HeroSliderProps) {
           modules={[EffectFade, Navigation, Pagination]}
           className="hero-swiper"
         >
-          {slides.map(({ _id, image, title, description }) => (
+          {slides.map(({ _id, imageUrl, title, description }) => (
             <SwiperSlide
               key={_id}
-              className="relative aspect-[16/7] rounded-xl overflow-hidden"
+              className="relative aspect-[9/7] md:aspect-[16/9] lg:aspect-[16/7] object-center rounded-xl overflow-hidden"
             >
               <Image
-                className="w-full"
-                src={image}
+                className="w-full min-h-96"
+                src={API_URL + imageUrl}
                 width={1000}
                 height={600}
                 alt={title}
